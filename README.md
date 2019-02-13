@@ -1,23 +1,32 @@
 # Hidden-Friends-Finder
 Hidden Friends Finder (HFF) for Facebook
 
-Program automates search for friends of targed profile based on facebook graph search method.
+The program automates the search of friends of targeted profile based on facebook graph search method.
+Run:
+`$ python HFF.py`
 
-After launch program runs in ... phases:
+After the launch program runs in 5 phases:
 
 ### INPUT PHASE
 Facebook login: *[email you use to login to facebook]*
 
-Facebook password: [no need to explain]
+Facebook password: *[no need to explain]*
 
-Target user ID: [Facebook user ID in numerical format]
+Target user ID: *[Facebook user ID in numerical format]*
 
 ### TESTING PHASE
-Program will automaticly scroll trough facebook profile in order to reveal all posts and comments. 
-At the same time it will test most important elements of facebook code. Reason is, facebook changes classes and names of html elements quite frequently. In that case program will let you know that code was chenged. You will have to add new values to file modules/elements.py.
+The program automatically scrolls through a Facebook profile to reveal all posts and comments. 
+At the same time, it tests the most important elements of the Facebook code. The reason is, facebook changes classes and names of HTML elements quite frequently. In that case, the program lets you know about changes. You have to add new values to file modules/elements.py.
 
 ### GATHERING DATA 
-HFF will try to gather as much data as possible. It will collect all comments and reactions on profile.
+HFF tries to gather as much data as possible. It collects all comments and reactions on a profile.
 
 ### ANALYSING DATA
-HFF will run analysis based on graph search for every account gathered in previus step. 
+HFF runs analysis based on graph search for every account gathered in the previous step. 
+
+### PRINTING DATA
+Results are saved to two csv files.
+
+[target_username]-confirmed-friends.csv - Profiles that were found using graph search.
+
+[target_username]-unconfirmed-friends.csv - Profiles that were collected during data collecting.
