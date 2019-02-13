@@ -2,8 +2,8 @@
 Hidden Friends Finder (HFF) for Facebook
 
 The program automates the search of friends of targeted profile based on facebook graph search method.
-Run:
-`$ python HFF.py`
+
+Run: `$ python HFF.py`
 
 After the launch program runs in 5 phases:
 
