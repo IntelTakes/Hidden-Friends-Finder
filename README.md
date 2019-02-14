@@ -23,17 +23,21 @@ Facebook password: [no need to explain]
 
 Target user ID: [Facebook user ID in numerical format]
 
-#### TESTING PHASE:
+
+### TESTING PHASE:
 The program automatically scrolls through a Facebook profile to reveal all posts and comments. 
 At the same time, it tests the most critical elements of the Facebook code. The reason is, facebook changes classes and names of HTML elements quite frequently. In that case, the program lets you know about changes. You have to add new values to file modules/elements.py.
 
-#### GATHERING DATA:
+
+### GATHERING DATA:
 HFF tries to gather as much data as possible. It collects all comments and reactions on a profile.
 
-#### ANALYSING DATA:
+
+### ANALYSING DATA:
 HFF runs analysis based on graph search for every account gathered in the previous step. 
 
-#### PRINTING DATA:
+
+### PRINTING DATA:
 Results are save to two CSV files.
 
 File Name  | Description
