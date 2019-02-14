@@ -1,6 +1,6 @@
 # Hidden Friends Finder (HFF) for Facebook
 
-The program automates the search of friends of targeted profile based on facebook graph search method.
+HFF automates search for friends of targeted profile based on graph search method. It's designed as OSINT tool for online investigations (not stalking your ex ;). Depends on profile activity and privacy settings it can "extract" from 30% to 90% of private friends list.
 
 ## Requirements
 *Selenium headless webdriver. HFF checks for installation and installs webdriver if none found.
@@ -22,7 +22,7 @@ Facebook login: *[email you use to login to facebook]*
 
 Facebook password: *[no need to explain]*
 
-Target user ID: *[Facebook user ID in numerical format]*  (you can find one easily here: [Findmyfbid.in](https://findmyfbid.in/) 
+Target user ID: *[Facebook user ID in numerical format]*  (you can find one easily here: [Findmyfbid.in](https://findmyfbid.in/)) 
 
 
 ### TESTING PHASE:
