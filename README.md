@@ -3,11 +3,11 @@
 The program automates the search of friends of targeted profile based on facebook graph search method.
 
 ## Requirements
-It uses selenium headless webdriver. HFF checks for installation and installs webdriver if none found.
+*Selenium headless webdriver. HFF checks for installation and installs webdriver if none found.
 
-Target profile must have at least one post and one comment or reaction visible publicly.
+*Target profile must have at least one post and one comment or reaction visible publicly.
 
-HFF works much better on accounts where friends list have privacy settings visibility - "only friends" (most cases). Privacy setting "only me" works as well but returns fewer accounts. 
+*HFF works much better on accounts where "friends list" visibility is set to - "only friends" (most cases). Privacy setting "only me" works as well but returns fewer accounts. 
 
 ## Run:
 `$ python HFF.py`
@@ -20,9 +20,9 @@ After the launch program runs in 5 phases:
 ### INPUT PHASE (if no options in run command):
 Facebook login: *[email you use to login to facebook]*
 
-Facebook password: [no need to explain]
+Facebook password: *[no need to explain]*
 
-Target user ID: [Facebook user ID in numerical format]
+Target user ID: *[Facebook user ID in numerical format]*  (you can find one easily here: [Findmyfbid.in](https://findmyfbid.in/) 
 
 
 ### TESTING PHASE:
