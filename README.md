@@ -16,7 +16,8 @@ HFF works much better on accounts where friends list have privacy settings visib
 
 After the launch program runs in 5 phases:
 
-#### INPUT PHASE (if no options in run command):
+
+### INPUT PHASE (if no options in run command):
 Facebook login: *[email you use to login to facebook]*
 
 Facebook password: [no need to explain]
