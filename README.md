@@ -4,9 +4,9 @@ Hidden Friends Finder (HFF) for Facebook
 The program automates the search of friends of targeted profile based on facebook graph search method.
 
 ## Run:
-'$ python HFF.py'
+`$ python HFF.py`
 
-'$ python HFF.py -l [login email] -p [password to facebook] -t [target Facebook ID]'
+`$ python HFF.py -l [login email] -p [password to facebook] -t [target Facebook ID]`
 
 After the launch program runs in 5 phases:
 
@@ -33,5 +33,4 @@ Results are save to two CSV files.
 File Name  | Description
 ------------- | -------------
 [target_username]-confirmed-friends.csv  | Profiles found using graph search.
-
 [target_username]-unconfirmed-friends.csv  | Profiles collected during data collecting phase, not confirmed by graph search.
