@@ -2,7 +2,6 @@ import time, json, operator, re
 
 from . import printer
 from . import chrome
-# from . import tests
 from . import elements
 
 from selenium.webdriver.common.keys import Keys
@@ -22,18 +21,21 @@ def login(login,password,browser):
         time.sleep(3)
 
     except:
-        printer.print_bad("Something went seriously wrong during login- check internet connection and python configuration")
+        printer.print_bad("Something went seriously wrong during login - check internet connection and python configuration")
         browser.close()
         exit()
 
     try:
-        browser.find_element_by_id('pass')
-        printer.print_bad("Login unsuccessful - check login and/or password")
-        browser.close()
-        exit()
-    except:
-        printer.print_good("Login to facebook account ({0}) successful".format(login))
-
+        login_test = get_elements(browser, **elements.recover)
+        if len(login_test) == 0:
+            printer.print_good("Login to facebook account ({}) successful".format(login))
+        else:
+            printer.print_bad("Login unsuccessful - check login and/or password")
+            browser.close()
+            exit()
+    except Exception as e:
+        printer.print_bad("Login test error: {}".format(e))
+        
     return
 
 def get_elements(browser, **kwargs):
@@ -60,7 +62,7 @@ def get_reactions(browser):
 
             see_more = get_elements(browser, **elements.see_more)
 
-            if len(see_more) > 0: 
+            if len(see_more) > 0:
                 chrome.scroll_into_view(browser, see_more[0])
                 time.sleep(1)
                 browser.execute_script("arguments[0].click();", see_more[0])

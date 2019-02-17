@@ -59,3 +59,11 @@ see_more =          {"value":"pam uiBoxLightblue uiMorePagerPrimary",
                     "attribute":"class",
                     "verbose":"see more reactions button",
                     "plural":"see more reactions buttons"}
+
+recover =          {"value":"_42ft _4jy0 _62c3 _4jy4 _517h _51sy",
+                    "html":"a",
+                    "attribute":"class"}
+
+
+
+

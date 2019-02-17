@@ -20,12 +20,24 @@ def test_elements(browser, *elements):
 
 def test_failed_prompt(browser):
     answer = None
-    while answer not in ("yes", "no"):
-        answer = input("Would you like to continue? [yes/no] ")
-        if answer == "yes":
+    while answer not in ("y", "n"):
+        answer = input("Would you like to continue? [y/n] ")
+        if answer == "y":
             pass
-        elif answer == "no":
+        elif answer == "n":
             browser.close()
             exit()
         else:
-            print("Please enter yes or no.")
+            print("Please press 'y' or 'n'.")
+            
+def profile_prompt(browser, profile_name, target):
+    answer = None
+    while answer not in ("y", "n"):
+        answer = input("User ID: {} is connected to profile name: {} - is this a right profile? [y/n] ".format(target, profile_name))
+        if answer == "y":
+            pass
+        elif answer == "n":
+            browser.close()
+            exit()
+        else:
+            print("Please press 'y' or 'n'.")

@@ -71,10 +71,13 @@ def scroll_page(browser, target):
 
     try:
         profile_name = core.get_profile_name(browser)
-        printer.print_info("Scrolling trough the profile page of {}. It might take a while...".format(profile_name))
+        tests.profile_prompt(browser, profile_name, target)
+        printer.print_info("Scrolling trough the profile page of {}. It might take a while...".format(profile_name))        
     except:
-        printer.print_info("Scrolling trough the profile page of {}. It might take a while...".format(target))
-
+        printer.print_bad("Cannot open profile page. Are you sure user ID is correct? Please check and start again.")
+        browser.close()
+        exit()
+    
     tests.test_elements(browser, elements.post)
 
     browser.execute_script("window.scrollTo(0,document.body.scrollHeight);") 
