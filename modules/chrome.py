@@ -1,4 +1,5 @@
 import platform, os, zipfile, time, sys
+from progress.spinner import Spinner
 
 from . import printer
 from . import core
@@ -72,19 +73,21 @@ def scroll_page(browser, target):
     try:
         profile_name = core.get_profile_name(browser)
         tests.profile_prompt(browser, profile_name, target)
-        printer.print_info("Scrolling trough the profile page of {}. It might take a while...".format(profile_name))        
-    except:
-        printer.print_bad("Cannot open profile page. Are you sure user ID is correct? Please check and start again.")
+        print("{}[*]{} Crawling trough the profile page of {}. It might take a while... ".format(printer.B, printer.GR, profile_name), end="", flush=True)
+    except Exception as e:
+        printer.print_bad("Cannot open profile page. Error message: {}. Are you sure user ID is correct? Please check and start again.".format(e))
         browser.close()
         exit()
-    
+
     tests.test_elements(browser, elements.post)
 
-    browser.execute_script("window.scrollTo(0,document.body.scrollHeight);") 
+    browser.execute_script("window.scrollTo(0,document.body.scrollHeight);")
     time.sleep(2)
 
     posts_after_scrolling = len(core.get_elements(browser, **elements.post))
+    spinner = Spinner()
     while True:
+        spinner.next()
         posts_before_scrolling = posts_after_scrolling
         browser.execute_script("window.scrollTo(0,document.body.scrollHeight);")
         time.sleep(4)
@@ -98,9 +101,10 @@ def scroll_page(browser, target):
                     scroll_into_view(browser, spinner)
                     time.sleep(3)
             else:
-                errors = tests.test_elements(browser, elements.reactions_link, elements.comment)
 
-                printer.print_info("Scrolling completed. Found {} posts and {} errors.".format(posts_after_scrolling, len(errors)))
+                errors = tests.test_elements(browser, elements.reactions_link, elements.comment)
+                # printer.print_info("\nCrawling completed. Found {} posts and {} errors.".format(posts_after_scrolling, len(errors)))
+                print("\n{}[*]{} Crawling completed. Found {} posts and {} errors.".format(printer.B, printer.GR, posts_after_scrolling, len(errors)))
                 break
     return errors
 

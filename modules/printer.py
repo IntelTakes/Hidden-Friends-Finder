@@ -34,8 +34,8 @@ def print_art():
     ¶¶¶¶¶¶{}___{}¶¶¶¶¶¶ {}FRIENDS{}
     ¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶ {}FINDER {}
     by {}{}
-    """.format(B,W,B,W,B,W,B,W,B,W,
-               B,W,B,W,B,W,B,W,version,author,GR))
+    """.format(B,GR,B,GR,B,GR,B,GR,B,GR,
+               B,GR,B,GR,B,GR,B,GR,version,author,GR))
 
 
 def print_banner(text):
@@ -56,8 +56,7 @@ def print_bad(text):
 
 def save_friends(browser, name, friends_list, category):
     try:
-        print_info("Writing to file {}-{}-friends.csv".format(name, category))
-
+        # print_info("Writing to file {}-{}-friends.csv".format(name, category))
         headers = ["Name","FB User ID","Profile URL",]
         with open("{}-{}-friends.csv".format(name, category),"w") as fd:
             spreadsheet = csv.DictWriter(fd,fieldnames=headers)
@@ -67,6 +66,6 @@ def save_friends(browser, name, friends_list, category):
     except Exception as e:
         print_bad("Error when writing to file: {}".format(e))
         pass
-    print_good("Task completed! {} {} friends found and saved".format(len(friends_list), category))
+    print_good("Task completed! {} {} friends saved to {}-{}-friends.csv".format(len(friends_list), category, name, category))
 
     return

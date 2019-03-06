@@ -5,7 +5,8 @@ def test_elements(browser, *elements):
     errors = []
     for element in elements:
         if len(browser.find_elements_by_xpath("//{}[@{}='{}']".format(element['html'], element['attribute'], element['value']))) > 0:
-            printer.print_good("{} test - ok".format(element['verbose']))
+            pass
+            # printer.print_good("{} test - ok".format(element['verbose']))
         else:
             if element['verbose'] == "post":
                 printer.print_bad('Critical error. No posts were found. Reasons: no posts in profile or post value "{}" was changed in page code'.format(element['value']))
@@ -29,11 +30,11 @@ def test_failed_prompt(browser):
             exit()
         else:
             print("Please press 'y' or 'n'.")
-            
+
 def profile_prompt(browser, profile_name, target):
     answer = None
     while answer not in ("y", "n"):
-        answer = input("User ID: {} is connected to profile name: {} - is this a right profile? [y/n] ".format(target, profile_name))
+        answer = input("\033[1;93m[?]\033[1;37m User ID: {} is connected to profile name: {} - is this a correct profile? [y/n] ".format(target, profile_name))
         if answer == "y":
             pass
         elif answer == "n":
