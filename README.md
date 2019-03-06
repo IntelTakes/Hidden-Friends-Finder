@@ -1,9 +1,9 @@
 # Hidden Friends Finder (HFF) for Facebook
 
-HFF automates search for friends of targeted profile based on graph search method. It's designed as OSINT tool for online investigations (not stalking your ex ;). Depends on profile activity and privacy settings it can "extract" from 30% to 90% of private friends list.
+HFF automates search for friends of targeted profile based on graph search method. It's designed as OSINT tool for online investigations (not stalking your ex :wink:). Depends on profile activity and privacy settings it can "extract" from 30% to 90% of private friends list.
 
-## Requirements
-- Python 3 plus additional libraries: Click, Progress, Requests. 
+### _Requirements_:
+- Python 3 plus additional libraries: Click, Progress, Requests. (check requirements.txt) 
 
 - Selenium headless webdriver. HFF checks for installation and installs webdriver if none found.
 
@@ -13,7 +13,8 @@ HFF automates search for friends of targeted profile based on graph search metho
 
 - HFF works much better on accounts where "friends list" visibility is set to - "only friends" (most cases). Privacy setting "only me" works as well but returns fewer accounts. 
 
-## Run:
+_____
+### RUN:
 `$ python HFF.py`
 
 `$ python HFF.py -l [login email] -p [password to facebook] -t [target Facebook ID]`
@@ -21,7 +22,7 @@ HFF automates search for friends of targeted profile based on graph search metho
 After the launch program runs in 5 phases:
 
 
-### INPUT PHASE (if no options given with run command):
+#### INPUT PHASE (if no options given with run command):
 Facebook login: *[email you use to login to facebook]*
 
 Facebook password: *[no need to explain]*
@@ -29,20 +30,20 @@ Facebook password: *[no need to explain]*
 Target user ID: *[Facebook user ID in numerical format]*  (you can find one easily here: [Findmyfbid.in](https://findmyfbid.in/)) 
 
 
-### TESTING PHASE:
+#### TESTING PHASE:
 The program automatically scrolls through a Facebook profile to reveal all posts and comments. 
 At the same time, it tests the most critical elements of the Facebook code. The reason is, facebook changes classes and names of HTML elements quite frequently. In that case, program lets you know about changes and ask to edit values in file modules/elements.py.
 
 
-### GATHERING DATA:
+#### GATHERING DATA:
 HFF tries to gather as much data as possible. It collects all comments and reactions on a profile.
 
 
-### ANALYSING DATA:
+#### ANALYSING DATA:
 HFF runs analysis based on graph search for every account gathered in the previous step. 
 
 
-### PRINTING DATA:
+#### PRINTING DATA:
 Results are save to two CSV files.
 
 File Name  | Description
