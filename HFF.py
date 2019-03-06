@@ -9,7 +9,7 @@ from modules import printer
 
 
 ### Global variables
-current_path = os.path.dirname(os.path.realpath(__file__))
+# current_path = os.path.dirname(os.path.realpath(__file__))
 
 @click.command()
 @click.option('-l', '--login', prompt='\nFacebook login', help='Email you use to login to facebook.', required=True)
@@ -18,9 +18,11 @@ current_path = os.path.dirname(os.path.realpath(__file__))
 def main(login, password, target):
     browser = chrome.setup()
     core.login(login,password,browser)
+
     printer.print_banner("Verifying data")
     errors = chrome.scroll_page(browser, target)
     profile_name = core.get_profile_name(browser)
+
     printer.print_banner("Gathering data")
     if "reactions" not in errors:
         reaction_accounts = core.get_reactions(browser)
@@ -30,7 +32,6 @@ def main(login, password, target):
         comment_accounts = core.get_comments(browser)
     else:
         comment_accounts = []
-
     combined_accounts = list({x['FB User ID']:x for x in reaction_accounts + comment_accounts}.values())
 
     printer.print_banner("Analysing data")
@@ -40,10 +41,10 @@ def main(login, password, target):
     printer.save_friends(browser, profile_name, hidden_friends, "confirmed")
     unconfirmed_friends = [x for x in combined_accounts if x not in hidden_friends]
     printer.save_friends(browser, profile_name, unconfirmed_friends, "unconfirmed")
+
     browser.close()
     exit()
 
 if __name__ == '__main__':
     printer.print_art()
-    chrome.install_webdriver()
     main()

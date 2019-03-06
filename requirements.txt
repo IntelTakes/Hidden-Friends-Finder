@@ -1,8 +1,10 @@
 certifi==2018.11.29
 chardet==3.0.4
 Click==7.0
+colorama==0.4.1
 idna==2.8
-progress==1.4
 requests==2.21.0
 selenium==3.141.0
+tqdm==4.31.1
 urllib3==1.24.1
+wincertstore==0.2
