@@ -48,5 +48,5 @@ Results are save to two CSV files.
 
 File Name  | Description
 ------------- | -------------
-[target_username]-confirmed-friends.csv  | Profiles found using graph search.
+[target_username]-confirmed-friends.csv  | Profiles found and confirmed using graph search.
 [target_username]-unconfirmed-friends.csv  | Profiles collected during data collecting phase, not confirmed by graph search.
