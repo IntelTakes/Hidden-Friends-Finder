@@ -3,6 +3,8 @@
 HFF automates search for friends of targeted profile based on graph search method. It's designed as OSINT tool for online investigations (not stalking your ex ;). Depends on profile activity and privacy settings it can "extract" from 30% to 90% of private friends list.
 
 ## Requirements
+- Python 3 plus additional libraries: Click, Progress, Requests. 
+
 - Selenium headless webdriver. HFF checks for installation and installs webdriver if none found.
 
 - Target profile must have at least one post and one comment or reaction visible publicly.
@@ -19,7 +21,7 @@ HFF automates search for friends of targeted profile based on graph search metho
 After the launch program runs in 5 phases:
 
 
-### INPUT PHASE (if no options in run command):
+### INPUT PHASE (if no options given with run command):
 Facebook login: *[email you use to login to facebook]*
 
 Facebook password: *[no need to explain]*
@@ -29,7 +31,7 @@ Target user ID: *[Facebook user ID in numerical format]*  (you can find one easi
 
 ### TESTING PHASE:
 The program automatically scrolls through a Facebook profile to reveal all posts and comments. 
-At the same time, it tests the most critical elements of the Facebook code. The reason is, facebook changes classes and names of HTML elements quite frequently. In that case, the program lets you know about changes. You have to add new values to file modules/elements.py.
+At the same time, it tests the most critical elements of the Facebook code. The reason is, facebook changes classes and names of HTML elements quite frequently. In that case, program lets you know about changes and ask to edit values in file modules/elements.py.
 
 
 ### GATHERING DATA:
