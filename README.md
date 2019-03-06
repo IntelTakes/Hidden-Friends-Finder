@@ -1,4 +1,4 @@
-# Hidden Friends Finder (HFF) for Facebook<pre>    ![](http://i66.tinypic.com/15zgv4.png) </pre>
+# Hidden Friends Finder (HFF) for Facebook ![](http://i66.tinypic.com/15zgv4.png) 
 
 HFF automates search for friends of targeted profile based on graph search method. It's designed as OSINT tool for online investigations (not stalking your ex :wink:). Depends on profile activity and privacy settings it can "extract" from 30% to 90% of private friends list.
 
