@@ -2,21 +2,18 @@
 
 HFF automates search for friends of targeted profile based on graph search method. It's designed as OSINT tool for online investigations (not stalking your ex :wink:). Depends on profile activity and privacy settings it can "extract" from 30% to 90% of private friends list.
 
-### _Requirements_:
+#### _Requirements_:
 - Python 3 plus additional libraries: Click, tqdm, Requests. (check requirements.txt) 
-
 - Chrome browser installed. Selenium headless webdriver is included for Windows and MacOS. HFF checks for OS type and choose correct driver.
-
 - Target profile must have at least one post and one comment or reaction visible publicly.
-
 - Only works with english version of Facebook so check your language settings.
-
-- HFF works much better on accounts where "friends list" visibility is set to - "only friends" (most cases). Privacy setting "only me" works as well but returns fewer accounts. 
+- HFF works much better on accounts where "friends list" visibility is set to - "only friends" (most cases). Privacy setting "only me" works as well but returns fewer accounts.
+- Tested on Mac and Win terminals. 
 
 _____
 ### RUN:
 `$ python HFF.py`
-or
+
 `$ python HFF.py -l [login email] -p [password to facebook] -t [target Facebook ID]`
 
 After the launch program runs in 5 phases:
