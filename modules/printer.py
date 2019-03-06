@@ -1,6 +1,7 @@
 import codecs, csv
+from colorama import init
 from . import core
-
+init()
 author = 'Musafir.py'
 version = '1.0'
 
@@ -16,10 +17,10 @@ C = '\033[1;36m'  # cyan
 GR = '\033[1;37m'  # gray
 colors = [G,R,B,P,C,O,GR]
 
-info = '{0}[*]{1} '.format(B,GR)
-ques =  '{0}[?]{1} '.format(C,GR)
-bad = '{0}[-]{1} '.format(R,GR)
-good = '{0}[+]{1} '.format(G,GR)
+info = '{}[*]{} '.format(B,GR)
+ques =  '{}[?]{} '.format(Y,GR)
+bad = '{}[-]{} '.format(R,GR)
+good = '{}[+]{} '.format(G,GR)
 
 
 def print_art():
@@ -30,16 +31,14 @@ def print_art():
     ¶¶¶¶¶¶{}___{}¶¶¶¶¶¶
     ¶¶¶¶{}_______{}¶¶¶¶
     ¶¶¶¶¶¶{}___{}¶¶¶¶¶¶
-    ¶¶¶¶¶¶{}___{}¶¶¶¶¶¶ {}HIDDEN{}
-    ¶¶¶¶¶¶{}___{}¶¶¶¶¶¶ {}FRIENDS{}
-    ¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶ {}FINDER {}
-    by {}{}
-    """.format(B,GR,B,GR,B,GR,B,GR,B,GR,
-               B,GR,B,GR,B,GR,B,GR,version,author,GR))
+    ¶¶¶¶¶¶{}___{}¶¶¶¶¶¶ {}HIDDEN
+    {}¶¶¶¶¶¶{}___{}¶¶¶¶¶¶ {}FRIENDS
+    {}¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶ {}FINDER v{}
+    by {}""".format(B, GR, B, GR, B, GR, B, GR, B, GR, B, GR, B, GR, B, GR, B, GR, version,author))
 
 
 def print_banner(text):
-    print('{1}[ {2}{0}{1} ]'.format(text, G, C))
+    print('{1}[ {2}{0}{1} ]{3}'.format(text, G, C, GR))
 
 def print_info(text):
     print(info + text)
@@ -56,7 +55,6 @@ def print_bad(text):
 
 def save_friends(browser, name, friends_list, category):
     try:
-        # print_info("Writing to file {}-{}-friends.csv".format(name, category))
         headers = ["Name","FB User ID","Profile URL",]
         with open("{}-{}-friends.csv".format(name, category),"w") as fd:
             spreadsheet = csv.DictWriter(fd,fieldnames=headers)

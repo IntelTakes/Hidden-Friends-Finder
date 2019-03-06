@@ -1,13 +1,11 @@
 import time, json, operator, re
-from progress.bar import IncrementalBar, Bar
-
+from tqdm import tqdm
 
 from . import printer
 from . import chrome
 from . import elements
 
 from selenium.webdriver.common.keys import Keys
-
 
 # Login to facebook
 def login(login,password,browser):
@@ -22,7 +20,9 @@ def login(login,password,browser):
         elem.send_keys(Keys.RETURN)
         time.sleep(3)
 
-    except:
+    except Exception as e:
+        print(e)
+        browser.save_screenshot('screenshot.png')
         printer.print_bad("Something went seriously wrong during login - check internet connection and python configuration")
         browser.close()
         exit()
@@ -51,11 +51,11 @@ def get_profile_name(browser):
     return name
 
 def get_reactions(browser):
-    # printer.print_info("Processing reactions")
+    printer.print_info("Processing reactions")
     reaction_accounts = []
     reactions_links = get_elements(browser, **elements.reactions_link)
 
-    bar = IncrementalBar('\033[1;37mProcessing reactions', fill='#', max=len(reactions_links), suffix='%(percent)d%%')
+    t = tqdm(total=len(reactions_links), ncols=100)
     for reaction_link in reactions_links:
         try:
             while reaction_link.is_displayed() == False:
@@ -109,20 +109,19 @@ def get_reactions(browser):
 
         time.sleep(1)
         chrome.click_it(close_btn[0])
-        bar.next()
+        t.update()
 
-    bar.finish()
-    printer.print_good("Found {} unique profiles in reactions".format(len(reaction_accounts)))
+    t.close()
+    # printer.print_good("Found {} unique profiles in reactions".format(len(reaction_accounts)))
     return reaction_accounts
 
 
 def get_comments(browser):
-    # printer.print_info("Collecting comments")
+    printer.print_info("Processing comments")
     comment_accounts = []
     comments_links = get_elements(browser, **elements.comments_link)
 
-    bar = IncrementalBar('Processing comments', fill='#', max=len(comments_links), suffix='%(percent)d%%')
-    # for i in range(len(comments_links)):
+    t = tqdm(total=len(comments_links), ncols=100)
     for comment_link in comments_links:
         try:
             chrome.scroll_into_view(browser, comment_link)
@@ -132,7 +131,7 @@ def get_comments(browser):
         except Exception as e:
             print(e)
             pass
-        bar.next()
+        t.update()
 
     for profile in comment_profiles:
         try:
@@ -152,15 +151,15 @@ def get_comments(browser):
             pass
 
 
-    bar.finish()
-    printer.print_good("Found {} unique profiles in comments".format(len(comment_accounts)))
+    t.close()
+    # printer.print_good("Found {} unique profiles in comments".format(len(comment_accounts)))
     return comment_accounts
 
 
 def find_mutual_friends(browser, target, accounts):
     hidden_friends = []
 
-    bar = IncrementalBar('\033[1;37mProcessing connections', fill='#', max=len(accounts), suffix='%(percent)d%%')
+    t = tqdm(total=len(accounts), ncols=100)
 
     for account in accounts:
         try:
@@ -182,10 +181,9 @@ def find_mutual_friends(browser, target, accounts):
                     hidden_friends.append(account)
         except Exception as e:
             print(e)
+        t.update()
 
-        bar.next()
-
-    bar.finish()
+    t.close()
     hidden_friends.sort(key=operator.itemgetter('Name'))
     printer.print_good("Found {} hidden friends".format(len(hidden_friends)))
     return hidden_friends

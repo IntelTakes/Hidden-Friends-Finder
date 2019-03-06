@@ -1,6 +1,5 @@
 from . import printer
 
-
 def test_elements(browser, *elements):
     errors = []
     for element in elements:
@@ -34,7 +33,8 @@ def test_failed_prompt(browser):
 def profile_prompt(browser, profile_name, target):
     answer = None
     while answer not in ("y", "n"):
-        answer = input("\033[1;93m[?]\033[1;37m User ID: {} is connected to profile name: {} - is this a correct profile? [y/n] ".format(target, profile_name))
+        print("{}".format(printer.ques), end="", flush=True)
+        answer = input('User ID: {} is connected to profile name: {} - is this a correct profile? [y/n] '.format(target, profile_name))
         if answer == "y":
             pass
         elif answer == "n":
