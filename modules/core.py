@@ -55,63 +55,62 @@ def get_reactions(browser):
     reaction_accounts = []
     reactions_links = get_elements(browser, **elements.reactions_link)
 
-    t = tqdm(total=len(reactions_links), ncols=100)
-    for reaction_link in reactions_links:
-        try:
-            while reaction_link.is_displayed() == False:
-                chrome.scroll_into_view(reaction_link, browser)
-            browser.execute_script("arguments[0].click();", reaction_link)
-            time.sleep(2)
+    with tqdm(total=len(reactions_links), ncols=100) as pbar:
+        for reaction_link in reactions_links:
+            try:
+                while reaction_link.is_displayed() == False:
+                    chrome.scroll_into_view(reaction_link, browser)
+                browser.execute_script("arguments[0].click();", reaction_link)
+                time.sleep(2)
 
-            see_more = get_elements(browser, **elements.see_more)
+                see_more = get_elements(browser, **elements.see_more)
 
-            if len(see_more) > 0:
-                chrome.scroll_into_view(browser, see_more[0])
-                time.sleep(1)
-                browser.execute_script("arguments[0].click();", see_more[0])
-                time.sleep(1)
+                if len(see_more) > 0:
+                    chrome.scroll_into_view(browser, see_more[0])
+                    time.sleep(1)
+                    browser.execute_script("arguments[0].click();", see_more[0])
+                    time.sleep(1)
 
-            reaction_profiles = get_elements(browser, **elements.reaction_profile)
-            if len(reaction_profiles) == 0:
-                time.sleep(5) #additional verification. Just in case code in pop-up window didn't load quickly enough.
                 reaction_profiles = get_elements(browser, **elements.reaction_profile)
+                if len(reaction_profiles) == 0:
+                    time.sleep(5) #additional verification. Just in case code in pop-up window didn't load quickly enough.
+                    reaction_profiles = get_elements(browser, **elements.reaction_profile)
 
-        except Exception as e:
-                    printer.print_bad("Error while trying to collect reactions")
-                    print(e)
-                    pass
+            except Exception as e:
+                        printer.print_bad("Error while trying to collect reactions")
+                        print(e)
+                        pass
 
-        try:
-            for profile in reaction_profiles:
-                if profile.text:
-                    link = profile.find_element_by_tag_name("a")
-                    user_data_json = link.get_attribute("data-gt")
-                    user_data_dict = json.loads(user_data_json)
-                    user_id = user_data_dict['engagement']['eng_tid']
+            try:
+                for profile in reaction_profiles:
+                    if profile.text:
+                        link = profile.find_element_by_tag_name("a")
+                        user_data_json = link.get_attribute("data-gt")
+                        user_data_dict = json.loads(user_data_json)
+                        user_id = user_data_dict['engagement']['eng_tid']
 
-                    account                = {}
-                    account['Name']        = profile.text
-                    account['Profile URL'] = "https://www.facebook.com/"+user_id
-                    account['FB User ID']  = user_id
+                        account                = {}
+                        account['Name']        = profile.text
+                        account['Profile URL'] = "https://www.facebook.com/"+user_id
+                        account['FB User ID']  = user_id
 
-                    if account not in reaction_accounts:
-                        reaction_accounts.append(account)
+                        if account not in reaction_accounts:
+                            reaction_accounts.append(account)
 
-        except Exception as e:
-                    print(e)
-                    pass
+            except Exception as e:
+                        print(e)
+                        pass
 
 
-        close_btn = get_elements(browser, **elements.close_button)
-        while len(close_btn) == 0:
-            time.sleep(1)
             close_btn = get_elements(browser, **elements.close_button)
+            while len(close_btn) == 0:
+                time.sleep(1)
+                close_btn = get_elements(browser, **elements.close_button)
 
-        time.sleep(1)
-        chrome.click_it(close_btn[0])
-        t.update()
+            time.sleep(1)
+            chrome.click_it(close_btn[0])
+            pbar.update()
 
-    t.close()
     # printer.print_good("Found {} unique profiles in reactions".format(len(reaction_accounts)))
     return reaction_accounts
 
@@ -121,17 +120,17 @@ def get_comments(browser):
     comment_accounts = []
     comments_links = get_elements(browser, **elements.comments_link)
 
-    t = tqdm(total=len(comments_links), ncols=100)
-    for comment_link in comments_links:
-        try:
-            chrome.scroll_into_view(browser, comment_link)
-            browser.execute_script("arguments[0].click();", comment_link)
-            time.sleep(2)
-            comment_profiles = get_elements(browser, **elements.comment)
-        except Exception as e:
-            print(e)
-            pass
-        t.update()
+    with tqdm(total=len(comments_links), ncols=100) as pbar:
+        for comment_link in comments_links:
+            try:
+                chrome.scroll_into_view(browser, comment_link)
+                browser.execute_script("arguments[0].click();", comment_link)
+                time.sleep(2)
+                comment_profiles = get_elements(browser, **elements.comment)
+            except Exception as e:
+                print(e)
+                pass
+            pbar.update()
 
     for profile in comment_profiles:
         try:
@@ -150,8 +149,6 @@ def get_comments(browser):
             print(e)
             pass
 
-
-    t.close()
     # printer.print_good("Found {} unique profiles in comments".format(len(comment_accounts)))
     return comment_accounts
 
@@ -159,30 +156,30 @@ def get_comments(browser):
 def find_mutual_friends(browser, target, accounts):
     hidden_friends = []
 
-    t = tqdm(total=len(accounts), ncols=100)
 
-    for account in accounts:
-        try:
-            browser.get("https://www.facebook.com/browse/mutual_friends/?uid={}&node={}".format(target, account['FB User ID']))
-            mutual_friends = get_elements(browser, **elements.mutual_friend)
+    with tqdm(total=len(accounts), ncols=100) as pbar:
+        for account in accounts:
+            try:
+                browser.get("https://www.facebook.com/browse/mutual_friends/?uid={}&node={}".format(target, account['FB User ID']))
+                mutual_friends = get_elements(browser, **elements.mutual_friend)
 
-            for bff in mutual_friends:
-                link = bff.find_element_by_tag_name('a')
-                user_data_json = link.get_attribute("data-gt")
-                user_data_dict = json.loads(user_data_json)
-                user_id        = user_data_dict['engagement']['eng_tid']
+                for bff in mutual_friends:
+                    link = bff.find_element_by_tag_name('a')
+                    user_data_json = link.get_attribute("data-gt")
+                    user_data_dict = json.loads(user_data_json)
+                    user_id        = user_data_dict['engagement']['eng_tid']
 
-                friend                = {}
-                friend['Name']        = link.text
-                friend['Profile URL'] = "https://www.facebook.com/"+user_id
-                friend['FB User ID']  = user_id
+                    friend                = {}
+                    friend['Name']        = link.text
+                    friend['Profile URL'] = "https://www.facebook.com/"+user_id
+                    friend['FB User ID']  = user_id
 
-                if account not in hidden_friends:
-                    hidden_friends.append(account)
-        except Exception as e:
-            print(e)
-        t.update()
+                    if account not in hidden_friends:
+                        hidden_friends.append(account)
+            except Exception as e:
+                print(e)
+            pbar.update()
 
-    t.close()
     hidden_friends.sort(key=operator.itemgetter('Name'))
+    printer.print_good("Found {} hidden friends".format(len(hidden_friends)))
     return hidden_friends
