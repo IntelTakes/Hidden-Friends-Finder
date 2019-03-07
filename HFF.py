@@ -36,11 +36,12 @@ def main(login, password, target):
 
     printer.print_banner("Analysing data")
     hidden_friends = core.find_mutual_friends(browser, target, combined_accounts)
+    unconfirmed_friends = [x for x in combined_accounts if x not in hidden_friends]
+    printer.print_good("Found {} accounts directly connected to {}: {} - confirmed friends, {} - probable friends ".format(len(hidden_friends+unconfirmed_friends), profile_name, len(hidden_friends), len(unconfirmed_friends)))
 
     printer.print_banner("Printing data")
     printer.save_friends(browser, profile_name, hidden_friends, "confirmed")
-    unconfirmed_friends = [x for x in combined_accounts if x not in hidden_friends]
-    printer.save_friends(browser, profile_name, unconfirmed_friends, "unconfirmed")
+    printer.save_friends(browser, profile_name, unconfirmed_friends, "probable")
 
     browser.close()
     exit()
