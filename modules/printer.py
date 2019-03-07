@@ -38,7 +38,7 @@ def print_art():
 
 
 def print_banner(text):
-    print('{1}[ {2}{0}{1} ]{3}'.format(text, G, C, GR))
+	print('\n{1}[ {2}{0}{1} ]{3}'.format(text, G, C, GR))
 
 def print_info(text):
     print(info + text)
