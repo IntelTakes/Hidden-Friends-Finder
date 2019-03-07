@@ -8,9 +8,6 @@ from modules import core
 from modules import printer
 
 
-### Global variables
-# current_path = os.path.dirname(os.path.realpath(__file__))
-
 @click.command()
 @click.option('-l', '--login', prompt='\nFacebook login', help='Email you use to login to facebook.', required=True)
 @click.option('-p', '--password', prompt='\nFacebook password', help="Password to facebook account.", required=True)
