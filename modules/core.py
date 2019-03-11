@@ -118,6 +118,7 @@ def get_reactions(browser):
 def get_comments(browser):
     printer.print_info("Processing comments")
     comment_accounts = []
+    comment_profiles = []
     comments_links = get_elements(browser, **elements.comments_link)
 
     with tqdm(total=len(comments_links), ncols=100) as pbar:
