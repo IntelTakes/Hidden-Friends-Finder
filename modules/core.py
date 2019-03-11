@@ -184,3 +184,4 @@ def find_mutual_friends(browser, target, accounts):
     hidden_friends.sort(key=operator.itemgetter('Name'))
     printer.print_good("Found {} hidden friends".format(len(hidden_friends)))
     return hidden_friends
+
