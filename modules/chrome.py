@@ -38,6 +38,7 @@ def setup():
         chromedriver = current_path + '/chromedriver.exe'
     else:
         printer.print_bad("Driver for your system is not included. Add driver manualy and modify code in chrome.py file")
+        exit()
 
     browser = webdriver.Chrome(executable_path=chromedriver, options=options)
     return browser
