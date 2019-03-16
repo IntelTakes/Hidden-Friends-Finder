@@ -4,6 +4,7 @@ HFF automates search for friends of targeted profile based on graph search metho
 
 #### _Requirements_:
 - Python 3 plus additional libraries (check requirements.txt).
+- Chrome driver included only for Windows and Mac OS. If you want to use HFF.py with linux, plese download proper driver and modify if statement in chrome.py. 
 - Chrome browser installed. Chrome webdriver (version 73) is included for Windows and MacOS. HFF checks for OS type and choose correct driver.
 - Target profile must have at least one post and one comment or reaction visible publicly.
 - Only works with english version of Facebook so check your language settings.
