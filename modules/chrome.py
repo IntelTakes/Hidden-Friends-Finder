@@ -69,12 +69,15 @@ def scroll_page(browser, target):
 
     t = tqdm(ncols=0)
     while True:
+        posts_limit = 100
         posts_before_scrolling = posts_after_scrolling
         browser.execute_script("window.scrollTo(0,document.body.scrollHeight);")
         time.sleep(4)
         posts_after_scrolling = len(core.get_elements(browser, **elements.post))
         browser.execute_script("window.scrollTo(0,0);")
         t.update()
+        if posts_after_scrolling >= post_limit:
+            break
 
         if posts_after_scrolling <= posts_before_scrolling:
             if len(core.get_elements(browser, **elements.spinner)) > 0:
