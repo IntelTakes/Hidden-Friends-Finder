@@ -76,7 +76,7 @@ def scroll_page(browser, target):
         posts_after_scrolling = len(core.get_elements(browser, **elements.post))
         browser.execute_script("window.scrollTo(0,0);")
         t.update()
-        if posts_after_scrolling >= post_limit:
+        if posts_after_scrolling >= posts_limit:
             break
 
         if posts_after_scrolling <= posts_before_scrolling:
